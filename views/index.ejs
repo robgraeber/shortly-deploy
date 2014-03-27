@@ -9,7 +9,6 @@
   <div id='container'></div>
 </script>
 
-
 <script id='link' type='text/x-handlebars-template'>
   <img src='/redirect_icon.png'/>
   <div class='info'>
@@ -20,7 +19,6 @@
   </div>
 </script>
 
-
 <script id='create' type='text/x-handlebars-template'>
   <form>
       <input class='text' type='text' name='url'>
@@ -30,8 +28,11 @@
   <div class='message'></div>
 </script>
 
+<script src='anything.js'></script>
+
 <script>
   $(function(){
+    console.log('creating new shortly!')
     new Shortly();
   });
 
@@ -39,12 +40,13 @@
   $('[type="text/x-handlebars-template"]').each(function(index, div){
     Templates[div.id] = Handlebars.compile(div.innerHTML);
   });
+
 </script>
 
-<script src='/client/app.js'></script>
+<!-- <script src='/client/app.js'></script>
 <script src='/client/link.js'></script>
 <script src='/client/links.js'></script>
 <script src='/client/linkView.js'></script>
 <script src='/client/linksView.js'></script>
 <script src='/client/createLinkView.js'></script>
-<script src='/client/router.js'></script>
+<script src='/client/router.js'></script> -->

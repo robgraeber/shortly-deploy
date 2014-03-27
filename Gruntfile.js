@@ -3,6 +3,16 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     concat: {
+      dist:{
+        src:['public/lib/underscore.js',
+            'public/lib/handlebars.js',
+            'public/lib/jquery.js',
+            'public/lib/templates.js',
+            'public/lib/backbone.js',
+            'public/client/**/*.js'
+          ],
+        dest:'public/anything.js'
+      }
     },
 
     mochaTest: {
@@ -21,6 +31,14 @@ module.exports = function(grunt) {
     },
 
     uglify: {
+      scripts: {
+        files: {
+          'public/anything.js':[
+            'public/lib/*.js',
+            'public/client/*.js'
+          ]
+        }
+      }
     },
 
     jshint: {
@@ -44,11 +62,11 @@ module.exports = function(grunt) {
       scripts: {
         files: [
           'public/client/**/*.js',
-          'public/lib/**/*.js',
+          'public/lib/**/*.js'
         ],
         tasks: [
-          'concat',
-          'uglify'
+          'concat'
+       //   'uglify'
         ]
       },
       css: {
@@ -60,7 +78,7 @@ module.exports = function(grunt) {
     shell: {
       prodServer: {
       }
-    },
+    }
   });
 
   grunt.loadNpmTasks('grunt-contrib-uglify');
@@ -94,6 +112,11 @@ module.exports = function(grunt) {
   ]);
 
   grunt.registerTask('build', [
+  ]);
+
+  grunt.registerTask('default', [
+    'concat',
+    'server-dev'
   ]);
 
   grunt.registerTask('upload', function(n) {
