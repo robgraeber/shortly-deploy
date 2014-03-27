@@ -3,7 +3,7 @@
 loggingEnabled: true
 debuggingEnabled: true
 devErrorsEnabled: true
-node_env: debug
+node_env: production
 # nodeProcessCountPerApplication: 1
 # maxConcurrentRequestsPerProcess: 1024
 # maxNamedPipeConnectionRetry: 24
