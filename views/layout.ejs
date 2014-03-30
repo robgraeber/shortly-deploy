@@ -1,10 +1,16 @@
 <!doctype html>
-<html>
+<html ng-app="myApp">
   <head>
     <meta charset="utf-8" />
     <title>Shortly</title>
     <link rel="stylesheet" type="text/css" href="style.css">
-    
+    <script src='/anything.js'></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js'></script>
+    <script src='http://code.angularjs.org/1.2.15/angular-route.min.js'></script>
+    <script src='/client/app.js'></script>
+    <script src='/client/controllers/displayLinks.js'></script>
+    <script src='/client/controllers/createLinks.js'></script>
+    <script src='/client/controllers/loginController.js'></script>
     <!-- <script src="/lib/jquery.js"></script>
     <script src='/anything.js'></script>
     <script src="/lib/underscore.js"></script>
@@ -16,6 +22,7 @@
 
   <body>
     <h1>Shortly</h1>
-    <%- body %>
+    <%-body%>
+    
   </body>
 </html>

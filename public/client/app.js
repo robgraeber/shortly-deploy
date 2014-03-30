@@ -1,40 +1,53 @@
-window.Shortly = Backbone.View.extend({
-  template: Templates.layout,
+window.app = angular.module('myApp', ['ngRoute']);
 
-  events: {
-    'click li a.index':  'renderIndexView',
-    'click li a.create': 'renderCreateView'
-  },
-
-  initialize: function(){
-    console.log( 'Shortly is running' );
-    $('body').append(this.render().el);
-
-    this.router = new Shortly.Router({ el: this.$el.find('#container') });
-    this.router.on('route', this.updateNav, this);
-
-    Backbone.history.start({ pushState: true });
-  },
-
-  render: function(){
-    this.$el.html( this.template() );
-    return this;
-  },
-
-  renderIndexView: function(e){
-    e && e.preventDefault();
-    this.router.navigate('/', { trigger: true });
-  },
-
-  renderCreateView: function(e){
-    e && e.preventDefault();
-    this.router.navigate('/create', { trigger: true });
-  },
-
-  updateNav: function(routeName){
-    this.$el.find('.navigation li a')
-      .removeClass('selected')
-      .filter('.' + routeName)
-      .addClass('selected');
+app.config(['$routeProvider',
+  function($routeProvider) {
+    $routeProvider.
+      when('/', {
+        templateUrl: '/client/templates/links.html',
+        controller: 'DisplayLinks'
+      })
+      .when('/create', {
+        templateUrl: '/client/templates/create.html',
+        controller: 'CreateLinks'
+      })
+      .when('/login', {
+        templateUrl: '/client/templates/login.html',
+        controller: 'LoginController'
+      })
+      .when('/signup', {
+        templateUrl: '/client/templates/signup.html',
+        // controller: 'PhoneDetailCtrl'
+      });
+  }]);
+app.service('LinkService', function($http){
+  this.getLinks = function(){
+    return $http.get('/links').then(function (response) {
+      return response.data;
+    }); 
+  }
+  this.postLink = function(link){
+    return $http.post('/links', link).then(function (response) {
+      return response.data;
+    }); 
+  }
+});
+app.service('LoginService', function($http, $rootScope, $location){
+  this.submitLogin = function(username, password){
+    var user = {
+      username: username,
+      password: password
+    };
+    return $http.post('/login', user).then(function (response) {
+      console.log("login response:", response);
+      $rootScope.isLoggedIn = response.data.isValid;
+      return $rootScope.isLoggedIn;
+    }); 
+  }
+  this.checkLogin = function(){
+    if(!$rootScope.isLoggedIn){
+       $location.path('/login');
+    }
+    return $rootScope.isLoggedIn;
   }
 });
