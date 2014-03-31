@@ -1,0 +1,16 @@
+<div ng-include src="'/client/templates/navigation.html'"></div>
+<div id='container'>
+	<button ng-click="orderParam='title'">Title</button>
+	<button ng-click="orderParam='-visits'">Visits</button>
+	<button ng-click="orderParam='url'">Url</button>
+	<input type="text" ng-model="searchBy" placeholder="Enter title here">
+  <div ng-repeat="link in links | orderBy:orderParam | filter:orderFn" class="link">
+    <img src='/redirect_icon.png'/>
+    <div class='info'>
+      <div class='visits'><span class='count'>{{link.visits}}</span>Visits</div>
+      <div class='title'>{{link.title}}</div>
+      <div class='original'>{{link.url}}</div>
+      <a href='{{link.base_url}}/{{link.code}}'>{{link.base_url}}/{{link.code}}</a>
+    </div>
+  </div>
+</div>

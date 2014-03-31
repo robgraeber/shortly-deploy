@@ -1,0 +1,17 @@
+<form>
+    <div>{{message}}</div>
+    <div>
+      <label for="username">Username:</label>
+      <input id="username" ng-model="username" type="text" name="username">
+    </div>
+    <div>
+      <label for="password">Password:</label>
+      <input id="password" ng-model="password" type="password" name="password">
+    </div>
+    <div>
+      <input type='submit' ng-click='sendLogin()' value='Login'>
+    </div>
+</form>
+<p>
+  <a href="/signup">Create an Account &rarr;</a>
+<p>

@@ -1,0 +1,18 @@
+<div ng-include src="'/client/templates/navigation.html'"></div>
+<div id='container'>
+  <form>
+    <input class='text' ng-model='urlText' type='text' name='url'>
+    <input type='submit' ng-click='sendLink()' value='Shorten'>
+  </form>
+  <img ng-show="isLoading" class='spinner' src='/spiffygif_46x46.gif'>
+  <div class='message'>{{message}}</div>
+  <div class="link"  ng-show="link">
+    <img src='/redirect_icon.png'/>
+      <div class='info'>
+        <div class='visits'><span class='count'>{{link.visits}}</span>Visits</div>
+        <div class='title'>{{link.title}}</div>
+        <div class='original'>{{link.url}}</div>
+        <a href='{{link.base_url}}/{{link.code}}'>{{link.base_url}}/{{link.code}}</a>
+      </div>
+  </div>
+</div>
